@@ -30,7 +30,6 @@ const Fields = (props) => {
         }
     }, [props.fields]);
     function addingClass(elem) {
-        console.log(`${elem.classList}`);
         setTimeout(() => {
             elem.classList.add(s.busy);
         }, 5);
@@ -83,11 +82,9 @@ const Fields = (props) => {
                             key={f}
                             onClick={(e) => {
                                 if (props.fields[f]) {
-                                    console.log("Это поле занято");
                                     return;
                                 }
                                 if (props.isMyMove) {
-                                    console.log("Подожите, я думаю");
                                     return;
                                 }
                                 let arr = props.freeFields.filter((k) => {
@@ -96,6 +93,7 @@ const Fields = (props) => {
                                 if (arr.length === 1) {
                                     props.setNewValue(1, f);
                                 }
+
                                 setTimeout(() => {
                                     e.target.classList.add(s.busy);
                                 }, 0);

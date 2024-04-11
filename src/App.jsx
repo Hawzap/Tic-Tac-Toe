@@ -2,7 +2,7 @@ import { connect } from "react-redux";
 import End from "./anotherComponents/End/End";
 import Fields from "./anotherComponents/Fields/Fields";
 import s from "./App.module.css";
-import { setStartValue } from "./BLL/tictactoe-reducer";
+import { setStartValue, switchIsEnd } from "./BLL/tictactoe-reducer";
 import { useEffect } from "react";
 
 function App(props) {
@@ -25,6 +25,7 @@ function App(props) {
                         winner={props.winner}
                         setStartValue={props.setStartValue}
                         isEnd={props.isEnd}
+                        switchIsEnd={props.switchIsEnd}
                     />
                 </div>
             ) : (
@@ -41,4 +42,4 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default connect(mapStateToProps, { setStartValue })(App);
+export default connect(mapStateToProps, { setStartValue, switchIsEnd })(App);

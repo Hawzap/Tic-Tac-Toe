@@ -79,6 +79,7 @@ let ticTacToeReducer = (state = initialState, action) => {
                     }
                 }),
             };
+
             newState.fields[`${action.field}`] =
                 action.player === 1 ? "x" : "o";
             return newState;
@@ -93,7 +94,7 @@ let ticTacToeReducer = (state = initialState, action) => {
         case SWITCH_IS_END:
             return {
                 ...state,
-                isEnd: true,
+                isEnd: !state.isEnd,
             };
 
         case SET_WINNER_LINE: {
@@ -156,7 +157,6 @@ let ticTacToeReducer = (state = initialState, action) => {
                 shouldAIMove: true,
                 wichFieldChanged: "",
                 isDraw: true,
-                isEnd: false,
             };
         }
 

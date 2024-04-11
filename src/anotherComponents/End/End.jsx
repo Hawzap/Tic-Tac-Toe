@@ -1,5 +1,6 @@
 import React from "react";
 import s from "./End.module.css";
+import sl from "../../App.module.css";
 
 let End = (props) => {
     return (
@@ -14,8 +15,13 @@ let End = (props) => {
                 </p>
                 <button
                     className={s.again}
-                    onClick={() => {
+                    onClick={(e) => {
                         props.setStartValue();
+                        const end = document.querySelector(`.${sl.end}`);
+                        end.classList.remove(sl.endActive);
+                        setTimeout(() => {
+                            props.switchIsEnd();
+                        }, 1000);
                     }}
                 >
                     Play again
