@@ -3,12 +3,6 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-
-    /* width: 100%;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center; */
 }
 
 .container {
@@ -82,7 +76,7 @@
     background-color: #fff;
     border-radius: 10px;
     top: -293px;
-    left: 251px;
+    left: 247px;
     transition: 1s;
 }
 
@@ -158,45 +152,116 @@
     color: #fff;
     font-size: 32px;
 }
-
-.k {
+.figureWrapper {
     position: absolute;
-    display: inline-block;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.k {
     width: 7px;
-    height: 0px;
+    height: 65px;
     border-radius: 10px;
     background-color: #fff;
-    left: 46px;
-    transform-origin: center;
 }
-
-.k1 {
-    transform: rotate(-45deg);
-    transition: 0.5s;
-}
-
-.k2 {
-    transform: rotate(45deg);
-    transition: 0.5s;
-}
-
-.busy .k1,
-.busy .k2 {
-    height: 65px;
-}
+.k,
 .c1 {
     display: inline-block;
     position: absolute;
+    top: 50%;
+    left: 50%;
+    transform-origin: center;
+    transition: 0.5s;
+}
+
+.k1 {
+    transform: translate(-50%, -50%) rotate(-45deg) scaleY(0);
+}
+
+.k2 {
+    transform: translate(-50%, -50%) rotate(45deg) scaleY(0);
+}
+
+.tic-enter .k1 {
+    transform: translate(-50%, -50%) rotate(-45deg) scaleY(0);
+}
+.tic-enter-active .k1 {
+    transform: translate(-50%, -50%) rotate(-45deg) scaleY(1);
+}
+.tic-exit .k1 {
+    transform: translate(-50%, -50%) rotate(-45deg) scaleY(1);
+}
+.tic-exit-active .k1 {
+    transform: translate(-50%, -50%) rotate(-45deg) scaleY(0);
+}
+
+.tic-enter .k2 {
+    transform: translate(-50%, -50%) rotate(45deg) scaleY(1);
+}
+.tic-enter-active .k2 {
+    transform: translate(-50%, -50%) rotate(45deg) scaleY(1);
+}
+.tic-exit .k2 {
+    transform: translate(-50%, -50%) rotate(45deg) scaleY(1);
+}
+.tic-exit-active .k2 {
+    transform: translate(-50%, -50%) rotate(45deg) scaleY(0);
+}
+
+.tic-done-enter .k {
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform-origin: center;
+    transition: 0.5s;
+    width: 7px;
+    height: 65px;
+    border-radius: 10px;
+    background-color: #fff;
+}
+.tic-done-enter .k1 {
+    transform: translate(-50%, -50%) rotate(-45deg) scaleY(1);
+}
+.tic-done-enter .k2 {
+    transform: translate(-50%, -50%) rotate(45deg) scaleY(1);
+}
+
+.c1 {
     width: 50px;
     height: 50px;
     border-radius: 50%;
     border: 7px solid white;
-    transform: scale(0);
-    transition: 0.5s;
+    transform: translate(-50%, -50%) scale(0);
 }
 
-.busy .c1 {
-    transform: scale(1);
+.circle-enter .c1 {
+    transform: translate(-50%, -50%) scale(0);
+}
+.circle-enter-active .c1 {
+    transform: translate(-50%, -50%) scale(1);
+}
+.circle-exit .c1 {
+    transform: translate(-50%, -50%) scale(1);
+}
+.circle-exit-active .c1 {
+    transform: translate(-50%, -50%) scale(0);
+}
+
+.circle-done-enter .c1 {
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 7px solid white;
+    transform-origin: center;
+    transform: translate(-50%, -50%) scale(1);
+    transition: 0.5s;
 }
 
 .blockContent {

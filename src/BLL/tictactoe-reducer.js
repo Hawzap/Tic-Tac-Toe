@@ -261,80 +261,51 @@ let checkWinnerLine = (
 
 export let checkWinner = (field, player1, player2, freeFields, isDraw) => {
     return (dispatch) => {
-        checkWinnerLine(
-            field,
-            player1,
-            player2,
-            [1, 2, 3],
-            dispatch,
-            "topH",
-            freeFields
-        );
-        checkWinnerLine(
-            field,
-            player1,
-            player2,
-            [4, 5, 6],
-            dispatch,
-            "centerH",
-            freeFields
-        );
-        checkWinnerLine(
-            field,
-            player1,
-            player2,
-            [7, 8, 9],
-            dispatch,
-            "bottomH",
-            freeFields
-        );
-
-        checkWinnerLine(
-            field,
-            player1,
-            player2,
-            [1, 5, 9],
-            dispatch,
-            "leftRR",
-            freeFields
-        );
-        checkWinnerLine(
-            field,
-            player1,
-            player2,
-            [3, 5, 7],
-            dispatch,
-            "rightRR",
-            freeFields
-        );
-
-        checkWinnerLine(
-            field,
-            player1,
-            player2,
-            [1, 4, 7],
-            dispatch,
-            "leftV",
-            freeFields
-        );
-        checkWinnerLine(
-            field,
-            player1,
-            player2,
-            [2, 5, 8],
-            dispatch,
-            "centerV",
-            freeFields
-        );
-        checkWinnerLine(
-            field,
-            player1,
-            player2,
-            [3, 6, 9],
-            dispatch,
-            "rightV",
-            freeFields
-        );
+        const fieldsProperties = [
+            {
+                line: [1, 2, 3],
+                lineName: "topH",
+            },
+            {
+                line: [4, 5, 6],
+                lineName: "centerH",
+            },
+            {
+                line: [7, 8, 9],
+                lineName: "bottomH",
+            },
+            {
+                line: [1, 5, 9],
+                lineName: "leftRR",
+            },
+            {
+                line: [3, 5, 7],
+                lineName: "rightRR",
+            },
+            {
+                line: [1, 4, 7],
+                lineName: "leftV",
+            },
+            {
+                line: [2, 5, 8],
+                lineName: "centerV",
+            },
+            {
+                line: [3, 6, 9],
+                lineName: "rightV",
+            },
+        ];
+        fieldsProperties.forEach((e) => {
+            checkWinnerLine(
+                field,
+                player1,
+                player2,
+                e.line,
+                dispatch,
+                e.lineName,
+                freeFields
+            );
+        });
 
         checkDraw(isDraw, dispatch);
     };

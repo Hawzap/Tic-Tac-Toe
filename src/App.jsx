@@ -3,34 +3,35 @@ import End from "./anotherComponents/End/End";
 import Fields from "./anotherComponents/Fields/Fields";
 import s from "./App.module.css";
 import { setStartValue, switchIsEnd } from "./BLL/tictactoe-reducer";
-import { useEffect } from "react";
+import { CSSTransition } from "react-transition-group";
 
-function App(props) {
-    useEffect(() => {
-        if (props.isEnd) {
-            setTimeout(() => {
-                document.querySelector(`.${s.end}`).classList.add(s.endActive);
-            }, 10);
-        }
-    }, [props.isEnd]);
+function App({ winner, isEnd, setStartValue, switchIsEnd }) {
     return (
         <div className="wrapper">
             <div className={s.app}>
                 <h1>Tic-Tac-Toe</h1>
                 <Fields />
             </div>
-            {props.isEnd ? (
+            <CSSTransition
+                in={isEnd}
+                classNames={{
+                    enter: s["end-enter"],
+                    enterActive: s["end-enter-active"],
+                    exit: s["end-exit"],
+                    exitActive: s["end-exit-active"],
+                    enterDone: s["end-done-enter"],
+                }}
+                timeout={1000}
+                unmountOnExit
+            >
                 <div className={s.end}>
                     <End
-                        winner={props.winner}
-                        setStartValue={props.setStartValue}
-                        isEnd={props.isEnd}
-                        switchIsEnd={props.switchIsEnd}
+                        winner={winner}
+                        setStartValue={setStartValue}
+                        switchIsEnd={switchIsEnd}
                     />
                 </div>
-            ) : (
-                ""
-            )}
+            </CSSTransition>
         </div>
     );
 }

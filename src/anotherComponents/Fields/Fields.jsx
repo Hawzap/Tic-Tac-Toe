@@ -7,6 +7,7 @@ import {
     setAIMoveThunk,
 } from "../../BLL/tictactoe-reducer";
 import cn from "classnames";
+import { CSSTransition } from "react-transition-group";
 
 const Fields = (props) => {
     const [win, setWin] = useState("");
@@ -29,18 +30,13 @@ const Fields = (props) => {
             );
         }
     }, [props.fields]);
-    function addingClass(elem) {
-        setTimeout(() => {
-            elem.classList.add(s.busy);
-        }, 5);
-    }
     useEffect(() => {
         let elem = document.getElementById(`${props.wichFieldChanged}`);
 
         if (elem === null) {
             return;
         } else {
-            addingClass(elem);
+            elem.classList.add(s.busy);
         }
     }, [props.wichFieldChanged]);
 
@@ -55,7 +51,6 @@ const Fields = (props) => {
             });
         }, 400);
     }, [props.isEnd]);
-
     return (
         <div className={s.fields}>
             <div
@@ -81,6 +76,9 @@ const Fields = (props) => {
                             className={`${s.field} `}
                             key={f}
                             onClick={(e) => {
+                                if (props.isEnd) {
+                                    return;
+                                }
                                 if (props.fields[f]) {
                                     return;
                                 }
@@ -93,25 +91,50 @@ const Fields = (props) => {
                                 if (arr.length === 1) {
                                     props.setNewValue(1, f);
                                 }
-
-                                setTimeout(() => {
-                                    e.target.classList.add(s.busy);
-                                }, 0);
+                                e.target.classList.add(s.busy);
                                 props.setAIMoveThunk();
                             }}
                         >
-                            {props.fields[`${f}`] === "x" ? (
-                                <>
-                                    <span className={`${s.k1} ${s.k}`}></span>
-                                    <span className={`${s.k2} ${s.k}`}></span>
-                                </>
-                            ) : props.fields[`${f}`] === "o" ? (
-                                <>
-                                    <span className={s.c1}></span>
-                                </>
-                            ) : (
-                                ""
-                            )}
+                            <>
+                                <CSSTransition
+                                    in={props.fields[`${f}`] === "x"}
+                                    classNames={{
+                                        enter: s["tic-enter"],
+                                        enterActive: s["tic-enter-active"],
+                                        exit: s["tic-exit"],
+                                        exitActive: s["tic-exit-active"],
+                                        enterDone: s["tic-done-enter"],
+                                    }}
+                                    timeout={500}
+                                    unmountOnExit
+                                >
+                                    <div className={s.figureWrapper}>
+                                        <span
+                                            className={`${s.k1} ${s.k}`}
+                                        ></span>
+                                        <span
+                                            className={`${s.k2} ${s.k}`}
+                                        ></span>
+                                    </div>
+                                </CSSTransition>
+
+                                <CSSTransition
+                                    in={props.fields[`${f}`] === "o"}
+                                    classNames={{
+                                        enter: s["circle-enter"],
+                                        enterActive: s["circle-enter-active"],
+                                        exit: s["circle-exit"],
+                                        exitActive: s["circle-exit-active"],
+                                        enterDone: s["circle-done-enter"],
+                                    }}
+                                    timeout={500}
+                                    unmountOnExit
+                                >
+                                    <div className={s.figureWrapper}>
+                                        <span className={s.c1}></span>
+                                    </div>
+                                </CSSTransition>
+                            </>
                         </div>
                     );
                 })}
